@@ -1,0 +1,25 @@
+
+body
+{
+  background: url('../images/background.jpg');
+  font-family: roboto, Sans-Serif ;
+  line-height: 25px;
+}
+
+h1
+{
+  line-height: 50px;
+  font-size: 40px;
+  text-align: center;
+}
+
+.character
+{
+  width: 100px;
+  height: 100px;
+}
+.character img
+{
+  width: 100%;
+  margin: 10px solid white;
+}
