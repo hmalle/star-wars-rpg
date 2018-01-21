@@ -8,15 +8,40 @@
   </head>
 
   <body>
+  <div class="mainContainer"> <!--contain every element in the body-->
     <h1>Star Wars RPG</h1>
-    <div class="allCharacters"></div> <!--all the characters initially displayed here-->
+    <div class="allCharacters">
+      <div class="character character1">
+        <p class="characterName">Obi-Wan Kenobi</p>
+        <img src="assets/images/obiWanKenobi.jpeg" alt="Obi-Wan Kenobi">
+        <p class="healthPoints"></p>
+      </div>
+      <div class="character character2">
+        <p class="characterName">Luke Skywalker</p>
+        <img src="assets/images/lukeSkywalker.jpeg" alt="Luke Skywalker">      
+        <p class="healthPoints"></p>
+      </div>
+      <div class="character character3">
+        <p class="characterName">Darth Sidious</p>
+        <img src="assets/images/darthSidious.jpeg" alt="Darth Sidious">     
+        <p class="healthPoints"></p>
+      </div>
+      <div class="character character4">
+        <p class="characterName">Darth Maul</p>
+        <img src="assets/images/darthMaul.jpeg" alt="Darth Maul">
+        <p class="healthPoints"></p>
+      </div>
+    </div> <!--all the characters initially displayed here-->
+    <br>
     <div class="yourCharacter">Your Character</div> <!-- the selected character displayed here-->
     <div class="enemies">Enemies Available To Attack</div>
     <div class="fightSection">Fight Section
       <br>
       <button value="Attack">Attack</button> 
     </div>
-    <div class="defender">Defender</div>
+    <div class="defenderSection">Defender</div>
     <script type="text/javascript" src="assets/javascript/game.js"></script>
+
+  </div>
   </body>
 </html>

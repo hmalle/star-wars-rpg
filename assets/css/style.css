@@ -4,22 +4,52 @@ body
   background: url('../images/background.jpg');
   font-family: roboto, Sans-Serif ;
   line-height: 25px;
+  overflow: auto;
 }
 
 h1
 {
   line-height: 50px;
   font-size: 40px;
-  text-align: center;
+  text-align: right;
+  margin-right: 100px;
 }
-
+.allCharacters
+{
+  overflow: auto;
+}
 .character
 {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  text-align: center;
+  background-color: #fff;
+  float: left;
+  border: 2px solid green;
 }
-.character img
+img
+{
+  width: 120px;
+  height: 100px;
+  margin: 0px 15px 0px 15px;
+}
+.character p
 {
   width: 100%;
-  margin: 10px solid white;
+}
+.yourCharacter, .enemies ,.fightSection, .defenderSection
+{
+  overflow: auto;
+}
+
+.enemies .character
+{
+  background-color: red;
+  border: 2px solid black;
+}
+.defenderSection .character
+{
+  background-color: black;
+  border: 2px solid green;
 }
