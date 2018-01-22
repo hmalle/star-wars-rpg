@@ -47,7 +47,7 @@ function initialize() //also reset!
   for(var a=0; a<allCharacters.length; a++)
   {
     $(".allCharacters").append(
-      "<div class='character ally'>"+
+      "<div class='character possibleAlly' data-index="+a+">"+
         "<p class='characterName'>"+allCharacters[a].name +"</p>"+
         "<img src='"+ allCharacters[a].url+"' alt='"+allCharacters[a].name+"'>"+
         "<p class='healthPoints'>" + allCharacters[a].healthPoints+"</p>"+
@@ -56,21 +56,22 @@ function initialize() //also reset!
 }
 
 $(document).ready(function()
-{ 
+{
   var player;
   var defender;
   var playerSet = false;
   var defenderSet = false;
   initialize();
-  $(".ally").on("click", function()
+  $(".possibleAlly").on("click", function()
   {
     if(!playerSet)
     {
       player = $(this);
       enemies = player.siblings();
-      player.removeClass("ally");
+      player.removeClass("possibleAlly");
+      player.addClass("attacker");
       enemies.addClass("enemy");
-      enemies.removeClass("ally");
+      enemies.removeClass("possibleAlly");
       $(".playerSection").append(player);
       $(".enemySection").append(enemies);
       playerSet = true;
@@ -86,5 +87,20 @@ $(document).ready(function()
       $(".defenderSection").append(defender);
       defenderSet = true;
     }
+  });
+  //everything above works fine
+  $(".attackButton").on("click", function()
+  {
+    var playerHealth = allCharacters[player.attr('data-index')].healthPoints;
+    var defenderHealth = allCharacters[defender.attr('data-index')].healthPoints;
+    var playerCounter = allCharacters[player.attr('data-index')].counterAttackPower;
+    var defenderCounter = allCharacters[defender.attr('data-index')].counterAttackPower;
+    console.log(playerCounter+", "+defenderCounter);
+    /*TODO
+      change the player health
+      update the counter attack power for the player only
+      check if any of them as zero health
+      This makes more sense in my mind!!
+    */
   });
 });
