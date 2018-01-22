@@ -1,68 +1,90 @@
 /* I think there might be a better way to manage these data*/
-var character1=
+var kenobi=
 {
   name: "Obi-Wan Kenobi",
+  url: "assets/images/obiWanKenobi.jpeg",
   healthPoints: 120,
-  attackPower: 10,
+  attackPower: 8,
   counterAttackPower: 10
 };
-var character2=
+var skywalker=
 {
   name: "Luke Skywalker",
+  url: "assets/images/lukeSkywalker.jpeg",
   healthPoints: 100,
   attackPower: 10,
-  counterAttackPower: 10
+  counterAttackPower: 5
 };
-var character3=
+var sidious=
 {
   name: "Darth Sidious",
+  url: "assets/images/darthSidious.jpeg",
   healthPoints: 150,
   attackPower: 10,
-  counterAttackPower: 10
+  counterAttackPower: 20
 };
-var character4= 
+var maul= 
 {
   name: "Darth Maul",
+  url: "assets/images/darthMaul.jpeg",
   healthPoints: 180,
   attackPower: 10,
-  counterAttackPower: 10
+  counterAttackPower: 25
 };
-/*
-var player1 = $(".character1");
-var player2 = $(".character2");
-var player3 = $(".character3");
-var player4 = $(".character4");
-*/
-/*
-function updateCharacterInfo()
-{
-  $(".character1").$("healthPoints").html(character1.healthPoints);
-}
-*/
 
-var characterSelected = false;
-var enemySelected = false;
+var allCharacters = [kenobi, skywalker, sidious, maul]; 
+var resetCharacters = allCharacters.slice(0); //for performing reset later on
+
+function initialize() //also reset!
+{
+ /*
+      <div class="character kenobi">
+        <p class="characterName">Obi-Wan Kenobi</p>
+        <img src="assets/images/obiWanKenobi.jpeg" alt="Obi-Wan Kenobi">
+        <p class="healthPoints">120</p>
+      </div>
+*/
+  for(var a=0; a<allCharacters.length; a++)
+  {
+    $(".allCharacters").append(
+      "<div class='character ally'>"+
+        "<p class='characterName'>"+allCharacters[a].name +"</p>"+
+        "<img src='"+ allCharacters[a].url+"' alt='"+allCharacters[a].name+"'>"+
+        "<p class='healthPoints'>" + allCharacters[a].healthPoints+"</p>"+
+      "</div>");    
+  }
+}
 
 $(document).ready(function()
-{
-  $(".character").on("click", function() //listens for clicks on the character only
+{ 
+  var player;
+  var defender;
+  var playerSet = false;
+  var defenderSet = false;
+  initialize();
+  $(".ally").on("click", function()
   {
-    if( !characterSelected )
+    if(!playerSet)
     {
-      var player = $(this);    
-      $(".allCharacters").hide();
-      var enemies = player.siblings();
-      $(".yourCharacter").html(player);
-      $(".enemies").html(enemies);
-      $(".enemies").css("background-colo: red");
-      characterSelected = true;
+      player = $(this);
+      enemies = player.siblings();
+      player.removeClass("ally");
+      enemies.addClass("enemy");
+      enemies.removeClass("ally");
+      $(".playerSection").append(player);
+      $(".enemySection").append(enemies);
+      playerSet = true;
     }
-    else if(!enemySelected)
-    {
-      $(".enemiesSection").hide($(this));
-      $(".defenderSection").html(this);
-      
-      enemySelected = true;
+  }); 
+  $(".enemySection").on("click",".enemy",function()
+  {
+    if(!defenderSet)
+    { 
+      defender = $(this);
+      defender.removeClass("enemy");
+      defender.addClass("defender");
+      $(".defenderSection").append(defender);
+      defenderSet = true;
     }
   });
 });

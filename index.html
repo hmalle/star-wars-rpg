@@ -11,35 +11,47 @@
   <div class="mainContainer"> <!--contain every element in the body-->
     <h1>Star Wars RPG</h1>
     <div class="allCharacters">
-      <div class="character character1">
+      <!--
+      <div class="friendlies character kenobi">
         <p class="characterName">Obi-Wan Kenobi</p>
         <img src="assets/images/obiWanKenobi.jpeg" alt="Obi-Wan Kenobi">
-        <p class="healthPoints"></p>
+        <p class="healthPoints">120</p>
       </div>
-      <div class="character character2">
+      <div class="friendlies character skywalker">
         <p class="characterName">Luke Skywalker</p>
         <img src="assets/images/lukeSkywalker.jpeg" alt="Luke Skywalker">      
-        <p class="healthPoints"></p>
+        <p class="healthPoints">100</p>
       </div>
-      <div class="character character3">
+      <div class="friendlies character sidious">
         <p class="characterName">Darth Sidious</p>
         <img src="assets/images/darthSidious.jpeg" alt="Darth Sidious">     
-        <p class="healthPoints"></p>
+        <p class="healthPoints">150</p>
       </div>
-      <div class="character character4">
+      <div class="friendlies character maul">
         <p class="characterName">Darth Maul</p>
         <img src="assets/images/darthMaul.jpeg" alt="Darth Maul">
-        <p class="healthPoints"></p>
+        <p class="healthPoints">180</p>
       </div>
-    </div> <!--all the characters initially displayed here-->
-    <br>
-    <div class="yourCharacter">Your Character</div> <!-- the selected character displayed here-->
-    <div class="enemies">Enemies Available To Attack</div>
-    <div class="fightSection">Fight Section
-      <br>
-      <button value="Attack">Attack</button> 
+      -->
     </div>
-    <div class="defenderSection">Defender</div>
+    <!--all the characters initially displayed here-->
+
+    <p class="text">Your Character</p>
+    <div class="playerSection"></div> <!-- the selected character displayed here-->
+
+    <p class="text">Enemies Available To Attack</p>
+    <div class="enemySection"></div>
+
+    <p class="text">Fight Section</p>
+    <div class="fightSection">
+      <button class="attackButton" value="attack">Attack</button> 
+    </div>
+    
+    <p class="text">Defender</p>
+    <div class="defenderSection"></div>
+
+    <div class="results"></div>
+
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 
   </div>

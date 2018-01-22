@@ -3,10 +3,12 @@ body
 {
   background: url('../images/background.jpg');
   font-family: roboto, Sans-Serif ;
-  line-height: 25px;
   overflow: auto;
 }
-
+.mainContainer
+{
+  margin: 10px;
+}
 h1
 {
   line-height: 50px;
@@ -21,12 +23,11 @@ h1
 .character
 {
   width: 150px;
-  height: 150px;
-  border: 1px solid black;
+  height: 130;
   text-align: center;
   background-color: #fff;
   float: left;
-  border: 2px solid green;
+  border: 3px solid green;
 }
 img
 {
@@ -34,22 +35,33 @@ img
   height: 100px;
   margin: 0px 15px 0px 15px;
 }
+p .text
+{
+  margin: 5px;
+  font-size: 30px;
+  margin: 10px 0px;
+  padding: 5px;
+}
 .character p
 {
   width: 100%;
 }
-.yourCharacter, .enemies ,.fightSection, .defenderSection
+.playerSection, 
+.enemySection,
+.fightSection, 
+.defenderSection
 {
   overflow: auto;
+  margin: 5px 0px;
 }
-
-.enemies .character
+.enemySection .character
 {
   background-color: red;
-  border: 2px solid black;
+  border: 3px solid black;
 }
 .defenderSection .character
 {
   background-color: black;
-  border: 2px solid green;
+  border: 3px solid green;
+  color: #fff;
 }
