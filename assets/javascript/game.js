@@ -32,27 +32,38 @@ var maul=
   counterAttackPower: 25
 };
 
-var allCharacters = [kenobi, skywalker, sidious, maul]; 
-var resetCharacters = allCharacters.slice(0); //for performing reset later on
+var all = [kenobi, skywalker, sidious, maul]; 
+var resetCharacters = all.slice(0); //for performing reset later on
 
 function initialize() //also reset!
 {
- /*
-      <div class="character kenobi">
-        <p class="characterName">Obi-Wan Kenobi</p>
-        <img src="assets/images/obiWanKenobi.jpeg" alt="Obi-Wan Kenobi">
-        <p class="healthPoints">120</p>
-      </div>
-*/
-  for(var a=0; a<allCharacters.length; a++)
+   /*
+        <div class="character kenobi">
+          <p class="characterName">Obi-Wan Kenobi</p>
+          <img src="assets/images/obiWanKenobi.jpeg" alt="Obi-Wan Kenobi">
+          <p class="healthPoints">120</p>
+        </div>
+  */
+  for(var a=0; a<all.length; a++)
   {
-    $(".allCharacters").append(
-      "<div class='character possibleAlly' data-index="+a+">"+
-        "<p class='characterName'>"+allCharacters[a].name +"</p>"+
-        "<img src='"+ allCharacters[a].url+"' alt='"+allCharacters[a].name+"'>"+
-        "<p class='healthPoints'>" + allCharacters[a].healthPoints+"</p>"+
+    $(".allSection").append(
+      "<div class='character availablePlayer' data-index="+a+">"+
+        "<p class='characterName'>"+all[a].name +"</p>"+
+        "<img src='"+ all[a].url+"' alt='"+all[a].name+"'>"+
+        "<p class='healthPoints'>" + all[a].healthPoints+"</p>"+
       "</div>");    
   }
+}
+
+function attacking( player, defender, attackNumber)
+{
+  var attackPower = attackNumber*(all[player.attr('data-index')].attackPower); 
+  var counterPower = all[defender.attr('data-index')].counterAttackPower;
+  all[player.attr('data-index')].healthPoints -= counterPower;
+  all[defender.attr('data-index')].healthPoints -= attackPower;  //remove some health pts from attacker
+  console.log("playerHealth = "+ all[player.attr('data-index')].healthPoints );
+  console.log("defenderHealth = "+ all[defender.attr('data-index')].healthPoints );
+  return "You attacked the defender";
 }
 
 $(document).ready(function()
@@ -61,22 +72,25 @@ $(document).ready(function()
   var defender;
   var playerSet = false;
   var defenderSet = false;
+  var results = "";
+  var attackNumber = 1;
   initialize();
-  $(".possibleAlly").on("click", function()
+  $(".availablePlayer").on("click", function()
   {
     if(!playerSet)
     {
       player = $(this);
       enemies = player.siblings();
-      player.removeClass("possibleAlly");
+      player.removeClass("availablePlayer");
       player.addClass("attacker");
       enemies.addClass("enemy");
-      enemies.removeClass("possibleAlly");
+      enemies.removeClass("availablePlayer");
       $(".playerSection").append(player);
       $(".enemySection").append(enemies);
       playerSet = true;
     }
   }); 
+
   $(".enemySection").on("click",".enemy",function()
   {
     if(!defenderSet)
@@ -88,19 +102,25 @@ $(document).ready(function()
       defenderSet = true;
     }
   });
-  //everything above works fine
+
   $(".attackButton").on("click", function()
   {
-    var playerHealth = allCharacters[player.attr('data-index')].healthPoints;
-    var defenderHealth = allCharacters[defender.attr('data-index')].healthPoints;
-    var playerCounter = allCharacters[player.attr('data-index')].counterAttackPower;
-    var defenderCounter = allCharacters[defender.attr('data-index')].counterAttackPower;
-    console.log(playerCounter+", "+defenderCounter);
-    /*TODO
-      change the player health
-      update the counter attack power for the player only
-      check if any of them as zero health
-      This makes more sense in my mind!!
-    */
+    // console.log(playerHealth+" "+playerAttack+" "+defenderHealth+" "+defenderCounter);
+    if(playerSet && defenderSet)
+    {
+      results = attacking( player , defender, attackNumber);
+      if(results === "won")
+      {
+      
+      }
+      else if(results === 'lost')
+      {
+      }
+      else
+      {
+        $(".results").html(results);
+      }
+      attackNumber++; //to keep track of the playerAttackPower
+    }
   });
 });
