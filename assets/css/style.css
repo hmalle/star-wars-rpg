@@ -54,6 +54,10 @@ p .text
   overflow: auto;
   margin: 5px 0px;
 }
+.playerSection, .defenderSection
+{
+  min-height: 142px;
+}
 .enemySection .character
 {
   background-color: red;

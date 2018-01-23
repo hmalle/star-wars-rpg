@@ -28,7 +28,7 @@ var maul=
   name: "Darth Maul",
   url: "assets/images/darthMaul.jpeg",
   healthPoints: 180,
-  attackPower: 10,
+  attackPower: 5,
   counterAttackPower: 25
 };
 
@@ -61,9 +61,24 @@ function attacking( player, defender, attackNumber)
   var counterPower = all[defender.attr('data-index')].counterAttackPower;
   all[player.attr('data-index')].healthPoints -= counterPower;
   all[defender.attr('data-index')].healthPoints -= attackPower;  //remove some health pts from attacker
+  //writeout the things that have happened!
   console.log("playerHealth = "+ all[player.attr('data-index')].healthPoints );
-  console.log("defenderHealth = "+ all[defender.attr('data-index')].healthPoints );
-  return "You attacked the defender";
+  console.log("defenderHealth = "+ all[defender.attr('data-index')].healthPoints ); 
+  if(all[player.attr('data-index')].healthPoints <= 0)
+  { 
+    return "lost";
+  }
+  if( all[defender.attr('data-index')].healthPoints <=0)
+  {
+    return "won";
+  }
+  else
+  {
+    var happened = "<p>You attacked"+all[player.attr('data-index')].name+" for "+attackPower+" damage</p>"+
+           "<p>"+all[defender.attr('data-index')].name+" attacked you back for "+counterPower+" damage</p>";
+    $("outcomeSection").html(happened);
+    return "";
+  }
 }
 
 $(document).ready(function()
@@ -73,9 +88,10 @@ $(document).ready(function()
   var playerSet = false;
   var defenderSet = false;
   var results = "";
+  var wins = 0;
   var attackNumber = 1;
   initialize();
-  $(".availablePlayer").on("click", function()
+  $(".allSection").on("click",".availablePlayer", function()
   {
     if(!playerSet)
     {
@@ -93,7 +109,7 @@ $(document).ready(function()
 
   $(".enemySection").on("click",".enemy",function()
   {
-    if(!defenderSet)
+    if(!defenderSet && playerSet)
     { 
       defender = $(this);
       defender.removeClass("enemy");
@@ -111,16 +127,40 @@ $(document).ready(function()
       results = attacking( player , defender, attackNumber);
       if(results === "won")
       {
-      
+        defender.remove();
+        defenderSet = false;
       }
-      else if(results === 'lost')
+      if(results === 'lost')
       {
-      }
-      else
-      {
-        $(".results").html(results);
+        attackNumber = 1;
+        $(".outcomeSection").html("<p>You have been defeated . . .GAME OVER! ! !</p>"+
+                          "<button class='restart'>Restart</button>");
       }
       attackNumber++; //to keep track of the playerAttackPower
     }
+    if(!playerSet)
+    {
+      $(".outcomeSection").html("<p>Please select your character<p>");
+    }
+    else if(!defenderSet)
+    {
+      $(".outcomeSection").html("<p>Please select an enemy to fight<p>");
+    }
   });
+  
+  $(".outcomeSection").on("click",".restart", function()
+  {
+    playerSet = false;
+    defenderSet = false;
+    attackNumber = 1;
+    all = resetCharacters.slice(0);
+    $(".playerSection").empty();
+    $(".enemySection").empty();
+    $(".defenderSection").empty();
+    $(".outcomeSection").empty();
+    console.log("The outcome is not empty");
+    initialize();
+  });
+
+
 });
