@@ -2,7 +2,7 @@
 body
 {
   background: url('../images/background.jpg');
-  font-family: roboto, Sans-Serif ;
+  font-family: helvetica, verdana , 'lucida sans';
   overflow: auto;
 }
 .mainContainer
@@ -32,7 +32,7 @@ h1
 img
 {
   width: 120px;
-  height: 100px;
+  height: 80px;
   margin: 0px 15px 0px 15px;
 }
 p .text
@@ -56,11 +56,11 @@ p .text
 }
 .playerSection, .defenderSection
 {
-  min-height: 140px;
+  min-height: 122px;
 }
 .enemySection .character
 {
-  background-color: red;
+  background-color: #e60000;
   border: 3px solid black;
 }
 .defenderSection .character

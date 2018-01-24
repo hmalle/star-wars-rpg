@@ -160,7 +160,7 @@ $(document).ready(function()
     attackNumber = 1;
     results = "";
     //all = resetCharacters.slice(0);
-    all= JSON.parse(JSON.stringify(resetCharacters));
+    all= JSON.parse(JSON.stringify(resetCharacters)); //deep copy
     $(".playerSection").empty();
     $(".enemySection").empty();
     $(".defenderSection").empty();
