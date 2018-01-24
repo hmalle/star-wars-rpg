@@ -56,7 +56,7 @@ p .text
 }
 .playerSection, .defenderSection
 {
-  min-height: 142px;
+  min-height: 140px;
 }
 .enemySection .character
 {

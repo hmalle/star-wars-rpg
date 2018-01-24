@@ -33,16 +33,17 @@ var maul=
 };
 
 var all = [kenobi, skywalker, sidious, maul]; 
-var resetCharacters = all.slice(0); //for performing reset later on
+//var resetCharacters = all.slice(0); //for performing reset later on
+var resetCharacters = JSON.parse(JSON.stringify(all));
 
-function initialize() //also reset!
+function initialize(all) //also reset!
 {
-   /*
-        <div class="character kenobi">
-          <p class="characterName">Obi-Wan Kenobi</p>
-          <img src="assets/images/obiWanKenobi.jpeg" alt="Obi-Wan Kenobi">
-          <p class="healthPoints">120</p>
-        </div>
+  /*
+    <div class="character kenobi">
+      <p class="characterName">Obi-Wan Kenobi</p>
+      <img src="assets/images/obiWanKenobi.jpeg" alt="Obi-Wan Kenobi">
+      <p class="healthPoints">120</p>
+    </div>
   */
   for(var a=0; a<all.length; a++)
   {
@@ -62,8 +63,11 @@ function attacking( player, defender, attackNumber)
   all[player.attr('data-index')].healthPoints -= counterPower;
   all[defender.attr('data-index')].healthPoints -= attackPower;  //remove some health pts from attacker
   //writeout the things that have happened!
-  console.log("playerHealth = "+ all[player.attr('data-index')].healthPoints );
-  console.log("defenderHealth = "+ all[defender.attr('data-index')].healthPoints ); 
+  $(".attacker .healthPoints").html( all[player.attr('data-index')].healthPoints); 
+  $(".defender .healthPoints").html( all[defender.attr('data-index')].healthPoints); 
+  $(".outcomeSection").html("<p>You attacked "+all[player.attr('data-index')].name+" for "+attackPower+" damage</p>"+
+         "<p>"+all[defender.attr('data-index')].name+" attacked you back for "+counterPower+" damage</p>");
+ 
   if(all[player.attr('data-index')].healthPoints <= 0)
   { 
     return "lost";
@@ -72,13 +76,7 @@ function attacking( player, defender, attackNumber)
   {
     return "won";
   }
-  else
-  {
-    var happened = "<p>You attacked"+all[player.attr('data-index')].name+" for "+attackPower+" damage</p>"+
-           "<p>"+all[defender.attr('data-index')].name+" attacked you back for "+counterPower+" damage</p>";
-    $("outcomeSection").html(happened);
-    return "";
-  }
+  return "";
 }
 
 $(document).ready(function()
@@ -90,7 +88,7 @@ $(document).ready(function()
   var results = "";
   var wins = 0;
   var attackNumber = 1;
-  initialize();
+  initialize(all);
   $(".allSection").on("click",".availablePlayer", function()
   {
     if(!playerSet)
@@ -128,23 +126,30 @@ $(document).ready(function()
       if(results === "won")
       {
         defender.remove();
+        wins++;
         defenderSet = false;
       }
       if(results === 'lost')
       {
         attackNumber = 1;
-        $(".outcomeSection").html("<p>You have been defeated . . .GAME OVER! ! !</p>"+
+        $(".outcomeSection").html("<p>You have been defeated . . .GAME OVER!!!!</p>"+
                           "<button class='restart'>Restart</button>");
       }
       attackNumber++; //to keep track of the playerAttackPower
     }
-    if(!playerSet)
+    if(wins === 3)
     {
-      $(".outcomeSection").html("<p>Please select your character<p>");
+      wins = 0;
+       $(".outcomeSection").html("<p>You have won!!!!. . .GAME OVER!!!!</p>"+
+                                "<button class='restart'>Restart</button>");
+    }
+    else if(!playerSet)
+    {
+      $(".outcomeSection").html("<p>Please select your character</p>");
     }
     else if(!defenderSet)
     {
-      $(".outcomeSection").html("<p>Please select an enemy to fight<p>");
+      $(".outcomeSection").html("<p>Please select an enemy to fight</p>");
     }
   });
   
@@ -153,14 +158,14 @@ $(document).ready(function()
     playerSet = false;
     defenderSet = false;
     attackNumber = 1;
-    all = resetCharacters.slice(0);
+    results = "";
+    //all = resetCharacters.slice(0);
+    all= JSON.parse(JSON.stringify(resetCharacters));
     $(".playerSection").empty();
     $(".enemySection").empty();
     $(".defenderSection").empty();
     $(".outcomeSection").empty();
-    console.log("The outcome is not empty");
-    initialize();
+    initialize(all);
   });
-
 
 });
