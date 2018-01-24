@@ -12,7 +12,7 @@ var skywalker=
   name: "Luke Skywalker",
   url: "assets/images/lukeSkywalker.jpeg",
   healthPoints: 100,
-  attackPower: 10,
+  attackPower: 9,
   counterAttackPower: 5
 };
 var sidious=
@@ -20,7 +20,7 @@ var sidious=
   name: "Darth Sidious",
   url: "assets/images/darthSidious.jpeg",
   healthPoints: 150,
-  attackPower: 10,
+  attackPower: 6,
   counterAttackPower: 20
 };
 var maul= 
@@ -33,8 +33,8 @@ var maul=
 };
 
 var all = [kenobi, skywalker, sidious, maul]; 
-//var resetCharacters = all.slice(0); //for performing reset later on
-var resetCharacters = JSON.parse(JSON.stringify(all));
+//var resetCharacters = all.slice(0); //shallow copying
+var resetCharacters = JSON.parse(JSON.stringify(all)); //deep copying
 
 function initialize(all) //also reset!
 {
@@ -120,7 +120,7 @@ $(document).ready(function()
   $(".attackButton").on("click", function()
   {
     // console.log(playerHealth+" "+playerAttack+" "+defenderHealth+" "+defenderCounter);
-    if(playerSet && defenderSet)
+    if(playerSet && defenderSet && all[player.attr('data-index')].healthPoints>0)
     {
       results = attacking( player , defender, attackNumber);
       if(results === "won")
