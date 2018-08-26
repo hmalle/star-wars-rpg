@@ -50,7 +50,7 @@ function initialize(all) //also reset!
     $(".allSection").append(
       "<div class='character availablePlayer' data-index="+a+">"+
         "<p class='characterName'>"+all[a].name +"</p>"+
-        "<img src='"+ all[a].url+"' alt='"+all[a].name+"'>"+
+        "<img class='characterImage' src='"+ all[a].url+"' alt='"+all[a].name+"'>"+
         "<p class='healthPoints'>" + all[a].healthPoints+"</p>"+
       "</div>");    
   }
@@ -133,7 +133,7 @@ $(document).ready(function()
       {
         attackNumber = 1;
         $(".outcomeSection").html("<p>You have been defeated . . .GAME OVER!!!!</p>"+
-                          "<button class='restart'>Restart</button>");
+                          "<button class='restartButton'>Restart</button>");
       }
       attackNumber++; //to keep track of the playerAttackPower
     }

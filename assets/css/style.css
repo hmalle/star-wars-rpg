@@ -1,71 +1,77 @@
 
-body
-{
+body{
   background: url('../images/background.jpg');
   font-family: helvetica, verdana , 'lucida sans';
   overflow: auto;
 }
-.mainContainer
-{
+.mainContainer{
   margin: 10px;
 }
-h1
-{
+h1{
   line-height: 50px;
   font-size: 40px;
   text-align: right;
   margin-right: 100px;
 }
-.allSection
-{
+.allSection{
   overflow: auto;
 }
-.character
-{
+.character{
   width: 150px;
   height: 130;
   text-align: center;
   background-color: #fff;
   float: left;
   border: 3px solid green;
+  border-radius: 5px;
+  margin: 0px 3px;
 }
-img
-{
+img{
   width: 120px;
   height: 80px;
   margin: 0px 15px 0px 15px;
 }
-p .text
-{
+p .text{
   margin: 5px;
   font-size: 30px;
   margin: 10px 0px;
   padding: 5px;
 }
-.character p
-{
+.character p{
   width: 100%;
+}
+.characterName{
+  height: 45px;
+}
+.characterImage{
+  border: 1px solid #56c396;
+  border-radius: 5px;
 }
 .playerSection, 
 .enemySection,
 .fightSection, 
-.defenderSection
-{
+.defenderSection{
   overflow: auto;
   margin: 5px 0px;
 }
-.playerSection, .defenderSection
-{
+.playerSection, .defenderSection{
   min-height: 122px;
 }
-.enemySection .character
-{
+.enemySection .character{
   background-color: #e60000;
   border: 3px solid black;
 }
-.defenderSection .character
-{
+.defenderSection .character{
   background-color: black;
   border: 3px solid green;
   color: #fff;
 }
+.attackButton, .restartButton{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  color: red;
+  font-weight: 600;
+}
+
