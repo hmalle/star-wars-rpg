@@ -1,3 +1,3 @@
 # Star Wars RPS Game
 
-[star-wars-rpg](hmalle.github.io/star-wars-rpg)
+[star-wars-rpg](https://hmalle.github.io/star-wars-rpg/)
